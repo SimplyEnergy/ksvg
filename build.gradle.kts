@@ -20,6 +20,7 @@ plugins {
     `maven-publish`
     java
     Dependencies.plugins.forEach { (n, v) -> id(n) version v }
+    id("com.google.cloud.artifactregistry.gradle-plugin") version "2.1.1"
 }
 
 group = "com.github.nwillc"
@@ -30,7 +31,19 @@ logger.lifecycle("${project.group}.${project.name}@${project.version}")
 repositories {
     mavenCentral()
     mavenLocal()
+    maven {
+        url = uri("artifactregistry://australia-southeast1-maven.pkg.dev/services-202108/sel-libs")
+    }
 }
+
+publishing {
+    repositories {
+        maven {
+            url = uri("artifactregistry://australia-southeast1-maven.pkg.dev/services-202108/sel-libs")
+        }
+    }
+}
+
 
 kotlin {
     jvm()

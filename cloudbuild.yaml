@@ -1,0 +1,18 @@
+timeout: 1200s
+options:
+  machineType: 'N1_HIGHCPU_8'
+
+steps:
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['pull', '$_ARTIFACT_REPO/gradle:7.2']
+    id: 'fetch-gradle'
+    waitFor: ['-']
+
+  - name: '$_ARTIFACT_REPO/gradle:7.2'
+    args: ['build', 'publish']
+    id: 'build'
+    env:
+      - 'GRADLE_USER_HOME=/workspace/.gradle'
+      - 'GRADLE_OPTS="-Dorg.gradle.daemon=false -Dkotlin.incremental=false"'
+    waitFor: ['fetch-gradle']
