@@ -14,7 +14,7 @@ steps:
         'jvmJar',
         'metadataJar',
         'generateMetadataFileForJvmPublication',
-        'generatePomFileForJvmPublication'
+        'generatePomFileForJvmPublication',
         'publishJvmPublicationToMavenRepository'
     ]
     id: 'build'
