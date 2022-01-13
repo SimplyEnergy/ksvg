@@ -10,7 +10,13 @@ steps:
     waitFor: ['-']
 
   - name: '$_ARTIFACT_REPO/gradle:7.2'
-    args: ['build', 'publish']
+    args: [
+        'jvmJar',
+        'metadataJar',
+        'generateMetadataFileForJvmPublication',
+        'generatePomFileForJvmPublication'
+        'publishJvmPublicationToMavenRepository'
+    ]
     id: 'build'
     env:
       - 'GRADLE_USER_HOME=/workspace/.gradle'
